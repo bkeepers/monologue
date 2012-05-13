@@ -1,25 +1,19 @@
 jQuery(function($) {
+  var statuses = new Monologue.Collection.Statuses();
+
   $('form').on('submit', function() {
-    $.ajax({
-      url: '/statuses',
-      type: 'POST',
-      dataType: 'json',
-      data: {text: $(this).find('textarea').val()},
-      success: function(data) {
-        $('#statuses').append('<li>' + data.text + '</li>');
-      }
-    });
+    statuses.create({text: $(this).find('textarea').val()});
     return false;
   });
 
-  $.ajax({
-    url: '/statuses',
-    dataType: 'json',
-    success: function(data) {
-      var $statuses = $('#statuses');
-      for(var i = 0; data.length > i; i++) {
-        $statuses.append('<li>' + data[i].text + '</li>');
-      }
-    }
-  })
+  var append = function(status) {
+    $('#statuses').append('<li>' + status.get('text') + '</li>');
+  }
+
+  statuses.on('reset', function() {
+    this.each(append);
+  });
+  statuses.on('add', append);
+
+  statuses.fetch();
 });

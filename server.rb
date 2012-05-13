@@ -9,8 +9,9 @@ get '/' do
 end
 
 post '/statuses' do
-  $statuses << params
-  params.to_json
+  data = JSON.parse(request.body.read)
+  $statuses << data
+  data.to_json
 end
 
 get '/statuses' do
