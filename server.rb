@@ -1,6 +1,4 @@
-require 'rubygems'
-require 'sinatra'
-require 'json'
+Bundler.require :default
 
 $statuses = []
 
