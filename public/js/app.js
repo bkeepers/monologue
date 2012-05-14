@@ -1,10 +1,7 @@
 jQuery(function($) {
   var statuses = new Monologue.Collection.Statuses();
 
-  $('form').on('submit', function() {
-    statuses.create({text: $(this).find('textarea').val()});
-    return false;
-  });
+  new Monologue.View.PostStatus({el: $('#new-status'), collection: statuses});
 
   var append = function(status) {
     $('#statuses').append('<li>' + status.get('text') + '</li>');
