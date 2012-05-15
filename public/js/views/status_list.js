@@ -23,6 +23,6 @@ Monologue.View.StatusList = Backbone.View.extend({
   },
 
   template: function(model) {
-    return this.make('li', {className:'status'}, model.get('text'));
+    return this.make('li', {'class':'status'}, model.get('text'));
   }
 });
