@@ -1,5 +1,5 @@
 describe "Monologue.View.StatusList", ->
-  Given -> @collection = new (Backbone.Collection.extend(url: "/mock"))
+  Given -> @collection = new Backbone.Collection
   Given -> spyOn(@collection, "fetch")
   Given -> @view = new Monologue.View.StatusList
     collection: @collection
