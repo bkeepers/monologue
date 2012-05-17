@@ -1,21 +1,20 @@
 describe "Monologue.View.StatusList", ->
-  beforeEach ->
-    @$el = $("<div/>")
-    @collection = new (Backbone.Collection.extend(url: "/mock"))
-    spyOn @collection, "fetch"
-    @view = new Monologue.View.StatusList
-      el: @$el
-      collection: @collection
+  Given -> @$el = $("<div/>")
+  Given -> @collection = new (Backbone.Collection.extend(url: "/mock"))
+  Given -> spyOn(@collection, "fetch")
+  Given -> @view = new Monologue.View.StatusList
+    el: @$el
+    collection: @collection
 
-  it "fetches records from the server", ->
-    expect(@collection.fetch).toHaveBeenCalled()
+  Then -> expect(@collection.fetch).toHaveBeenCalled()
 
-  it "renders when collection is reset", ->
-    @collection.reset [ text: "Unit testing is fun" ]
-    expect(@$el).toContain("li")
-    expect(@$el.find("li")).toHaveText("Unit testing is fun")
+  describe "~ binding to collection events", ->
+    context "collection fires reset", ->
+      When -> @collection.reset [ text: "Unit testing is fun" ]
+      Then -> expect(@$el).toContain("li")
+      Then -> expect(@$el.find("li")).toHaveText("Unit testing is fun")
 
-  it "appends newly added items", ->
-    @collection.add text: 'Maybe not "fun", but at least useful'
-    expect(@$el).toContain("li")
-    expect(@$el.find("li")).toHaveText('Maybe not "fun", but at least useful')
+    context "collection fires add", ->
+      When -> @collection.add text: 'Maybe not "fun", but at least useful'
+      Then -> expect(@$el).toContain("li")
+      Then -> expect(@$el.find("li")).toHaveText('Maybe not "fun", but at least useful')
