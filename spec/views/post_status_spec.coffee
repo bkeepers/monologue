@@ -1,5 +1,6 @@
 describe "Monologue.View.PostStatus", ->
-  Given -> @$el = $("<form><textarea>See, it's not so hard!</textarea></form>")
+  Given -> @$el = affix('form')
+  Given -> @$el.affix('textarea').val("See, it's not so hard!")
   Given -> @collection = new (Backbone.Collection.extend(url: "/mock"))
   Given -> spyOn(@collection, "create")
   Given -> @view = new Monologue.View.PostStatus
