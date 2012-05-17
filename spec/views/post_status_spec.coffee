@@ -16,4 +16,4 @@ describe "Monologue.View.PostStatus", ->
 
     it "clears the textarea", ->
       @$el.trigger "submit"
-      expect(@$el.find("textarea").val()).toEqual ""
+      expect(@$el.find("textarea")).toHaveValue("")

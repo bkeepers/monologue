@@ -12,10 +12,10 @@ describe "Monologue.View.StatusList", ->
 
   it "renders when collection is reset", ->
     @collection.reset [ text: "Unit testing is fun" ]
-    expect(@$el.find("li").length).toBe 1
-    expect(@$el.find("li").text()).toEqual "Unit testing is fun"
+    expect(@$el).toContain("li")
+    expect(@$el.find("li")).toHaveText("Unit testing is fun")
 
   it "appends newly added items", ->
-    @collection.add text: "Maybe not \"fun\", but at least useful"
-    expect(@$el.find("li").length).toBe 1
-    expect(@$el.find("li").text()).toEqual "Maybe not \"fun\", but at least useful"
+    @collection.add text: 'Maybe not "fun", but at least useful'
+    expect(@$el).toContain("li")
+    expect(@$el.find("li")).toHaveText('Maybe not "fun", but at least useful')
