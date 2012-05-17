@@ -8,5 +8,8 @@ group :test do
   gem "cucumber"
   gem "rspec-expectations"
   gem "capybara-webkit"
-  gem "evergreen"
+
+  gem 'jasmine-headless-webkit'
+  gem 'guard-jasmine-headless-webkit'
+
 end
