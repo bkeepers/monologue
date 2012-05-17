@@ -1,18 +1,28 @@
 describe "Monologue.View.StatusList", ->
   Given -> @collection = new Backbone.Collection
+  Given -> spyOn(@collection, "on")
   Given -> spyOn(@collection, "fetch")
-  Given -> @view = new Monologue.View.StatusList
+
+  Given -> @subject = new Monologue.View.StatusList
     collection: @collection
 
-  Then -> expect(@collection.fetch).toHaveBeenCalled()
+  describe "#initialize", ->
+    Then -> expect(@collection.on).toHaveBeenCalledWith('reset', @subject.render)
+    Then -> expect(@collection.on).toHaveBeenCalledWith('add', @subject.add)
+    Then -> expect(@collection.fetch).toHaveBeenCalled()
 
-  describe "~ binding to collection events", ->
-    context "collection fires reset", ->
-      When -> @collection.reset [ text: "Unit testing is fun" ]
-      Then -> expect(@view.$el).toContain("li")
-      Then -> expect(@view.$el.find("li")).toHaveText("Unit testing is fun")
+  describe "#render", ->
+    Given -> @collection.add(text: "Unit testing is fun")
+    When -> @subject.render()
+    Then -> expect(@subject.$("li.status")).toHaveText("Unit testing is fun")
 
-    context "collection fires add", ->
-      When -> @collection.add text: 'Maybe not "fun", but at least useful'
-      Then -> expect(@view.$el).toContain("li")
-      Then -> expect(@view.$el.find("li")).toHaveText('Maybe not "fun", but at least useful')
+  describe "#add", ->
+    Given -> @model = new Backbone.Model(text: 'Maybe not "fun", but at least useful')
+    When -> @subject.add(@model)
+    Then -> expect(@subject.$("li.status")).toHaveText('Maybe not "fun", but at least useful')
+
+    context "adding another model", ->
+      Given -> @anotherModel = new Backbone.Model(text: 'Nope, totally fun')
+      When -> @subject.add(@anotherModel)
+      Then -> @subject.$("li").length == 2
+      Then -> expect(@subject.$("li.status:last")).toHaveText('Nope, totally fun')

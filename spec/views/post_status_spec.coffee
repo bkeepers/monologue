@@ -1,14 +1,16 @@
 describe "Monologue.View.PostStatus", ->
-  Given -> @$el = affix('form')
-  Given -> @$el.affix('textarea').val("See, it's not so hard!")
-  Given -> @collection = new Backbone.Collection
-  Given -> spyOn(@collection, "create")
+  Given -> @collection = {}
   Given -> @view = new Monologue.View.PostStatus
-    el: @$el
     collection: @collection
 
-  describe "~ binding to user events", ->
-    context "form fires submit", ->
-      When -> @$el.trigger("submit")
-      Then -> expect(@collection.create).toHaveBeenCalledWith text: "See, it's not so hard!"
-      Then -> expect(@$el.find("textarea")).toHaveValue("")
+  Then -> expect(@view.events).toEqual
+    "submit": "submit"
+
+  describe "#submit", ->
+    Given -> @e = preventDefault: jasmine.createSpy()
+    Given -> @collection.create = jasmine.createSpy()
+    Given -> @view.$el.affix('textarea').val("See, it's not so hard!")
+    When -> @view.submit(@e)
+    Then -> expect(@e.preventDefault).toHaveBeenCalled()
+    Then -> expect(@collection.create).toHaveBeenCalledWith text: "See, it's not so hard!"
+    Then -> expect(@view.$("textarea")).toHaveValue("")
