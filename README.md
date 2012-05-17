@@ -2,7 +2,7 @@ This is a demo application to accompany my talk [The Plight of Pinocchio: JavaSc
 
 ## Running the Tests
 
-The integration tests use Cucumber and the unit tests use Evergreen, both of which are Ruby projects.
+The integration tests use Cucumber and the unit tests use jasmine-headless-webkit, both of which are Ruby projects.
 
 1. Install Ruby
 
@@ -18,6 +18,14 @@ The integration tests use Cucumber and the unit tests use Evergreen, both of whi
 
         bundle exec cucumber
 
-5. Run the unit tests with:
+5. Install qt (a jasmine-headless-webkit dependency, see its [instructions if you don't have OS X & homebrew](http://johnbintz.github.com/jasmine-headless-webkit/))
 
-        bundle exec evergreen run
+        brew install qt --build-from-source
+
+6. Run the unit tests with:
+
+        bundle exec jasmine-headless-webkit
+
+7. You can also run the unit tests continuously with:
+
+        bundle exec guard

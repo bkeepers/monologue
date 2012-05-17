@@ -1,5 +1,3 @@
-require('/js/views/status_list.js');
-
 describe("Monologue.View.StatusList", function() {
   var view, $el, collection;
 

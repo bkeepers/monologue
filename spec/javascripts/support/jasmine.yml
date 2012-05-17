@@ -1,0 +1,19 @@
+src_files:
+  - "jquery.js"
+  - "underscore.js"
+  - "backbone.js"
+
+  - "setup.js"
+  - "**/*.{js,coffee}"
+
+stylesheets:
+
+helpers:
+  - "helpers/**/*.{js,coffee}"
+
+spec_files:
+  - "**/*[Ss]pec.{js,coffee}"
+
+src_dir: public/js
+
+spec_dir: spec
