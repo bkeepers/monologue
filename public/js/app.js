@@ -1,11 +1,18 @@
+function addStatus(options) {
+    var text = options.text;
+    $.ajax({
+        url: '/statuses',
+        type: 'POST',
+        dataType: 'json',
+        data: {text: text},
+        success: options.success
+    });
+}
 jQuery(function ($) {
     $('form').on('submit', function (event) {
         event.preventDefault();
-        $.ajax({
-            url: '/statuses',
-            type: 'POST',
-            dataType: 'json',
-            data: {text: $(this).find('textarea').val()},
+        addStatus({
+            text: $(event.target).find("textarea").val(),
             success: function (data) {
                 $('#statuses').append('<li>' + data.text + '</li>');
             }
