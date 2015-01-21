@@ -66,3 +66,5 @@ build/
 .rvmrc
 
 
+
+test/log
