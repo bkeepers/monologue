@@ -1,0 +1,33 @@
+{
+  "name": "monologue",
+  "version": "1.0.0",
+  "description": "coding kata @ monologue",
+  "main": "index.js",
+  "scripts": {
+    "start": "rackup --port 9295",
+    "test": "mocha test/"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/coding-kata/monologue"
+  },
+  "keywords": [
+    "ruby",
+    "test",
+    "e2e"
+  ],
+  "author": "azu",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/coding-kata/monologue/issues"
+  },
+  "homepage": "https://github.com/coding-kata/monologue",
+  "devDependencies": {
+    "espower-loader": "^0.10.0",
+    "intelli-espower-loader": "^0.6.0",
+    "mocha": "^2.1.0",
+    "phantomjs": "^1.9.13",
+    "power-assert": "^0.10.1",
+    "testium": "^2.3.0"
+  }
+}
